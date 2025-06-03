@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyaraj Rathod - Full Stack Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a192f;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --green: #64ffda;
+            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--navy);
+            color: var(--slate);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--lightest-slate);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .nav-links span {
+            color: var(--green);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 100px;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: clamp(40px, 8vw, 80px);
+            color: var(--lightest-slate);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .hero h3 {
+            font-size: clamp(40px, 8vw, 80px);
+            color: var(--slate);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 540px;
+            margin-bottom: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 1px solid var(--green);
+            color: var(--green);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .cta-button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 26px;
+            color: var(--lightest-slate);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .section-title::before {
+            content: "01.";
+            font-family: var(--font-mono);
+            font-size: 20px;
+            color: var(--green);
+            margin-right: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            position: relative;
+            width: 300px;
+            height: 1px;
+            margin-left: 20px;
+            background-color: var(--lightest-navy);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+        }
+
+        .about-text a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .about-text a:hover {
+            text-decoration: underline;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(140px, 200px));
+            gap: 10px;
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .skills-list li {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skills-list li::before {
+            content: "▹";
+            color: var(--green);
+            position: absolute;
+            left: 0;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            border-radius: 4px;
+            width: 100%;
+            filter: grayscale(100%) contrast(1);
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover img {
+            filter: none;
+        }
+
+        .about-image::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background: var(--green);
+            opacity: 0.2;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .about-image:hover::before {
+            opacity: 0;
+        }
+
+        /* Experience Section */
+        .experience {
+            max-width: 700px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .experience .section-title::before {
+            content: "02.";
+        }
+
+        .job-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-left: 2px solid var(--lightest-navy);
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--slate);
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .tab-button.active {
+            color: var(--green);
+            border-left-color: var(--green);
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .job-content {
+            margin-left: 30px;
+        }
+
+        .job-title {
+            color: var(--lightest-slate);
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .job-date {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--light-slate);
+            margin-bottom: 25px;
+        }
+
+        .job-description {
+            list-style: none;
+        }
+
+        .job-description li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--slate);
+        }
+
+        .job-description li::before {
+            content: "▹";
+            color: var(--green);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Projects Section */
+        .projects {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        .projects .section-title::before {
+            content: "03.";
+        }
+
+        .project-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .project {
+            background: var(--light-navy);
+            border-radius: 4px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            color: var(--green);
+            font-size: 24px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: var(--light-slate);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--green);
+        }
+
+        .project h3 {
+            color: var(--lightest-slate);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .project p {
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .project-tech span {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--light-slate);
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .contact .section-title::before {
+            content: "04.";
+        }
+
+        .contact .section-title {
+            justify-content: center;
+        }
+
+        .contact .section-title::after {
+            display: none;
+        }
+
+        .contact p {
+            font-size: 18px;
+            margin: 30px 0 50px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        /* Social Links */
+        .social-links {
+            position: fixed;
+            bottom: 0;
+            left: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--light-slate);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .social-links::after {
+            content: "";
+            width: 1px;
+            height: 90px;
+            background: var(--light-slate);
+        }
+
+        .email-link {
+            position: fixed;
+            bottom: 0;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .email-link a {
+            color: var(--light-slate);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            writing-mode: vertical-rl;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .email-link a:hover {
+            color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .email-link::after {
+            content: "";
+            width: 1px;
+            height: 90px;
+            background: var(--light-slate);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .job-tabs {
+                flex-direction: column;
+                border-left: none;
+                border-top: 2px solid var(--lightest-navy);
+            }
+
+            .tab-button {
+                border-left: none;
+                border-top: 2px solid transparent;
+            }
+
+            .tab-button.active {
+                border-left: none;
+                border-top-color: var(--green);
+            }
+
+            .job-content {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            .social-links,
+            .email-link {
+                display: none;
+            }
+
+            .section-title::after {
+                width: 100px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">DR</div>
+            <ul class="nav-links">
+                <li><a href="#about"><span>01.</span> About</a></li>
+                <li><a href="#experience"><span>02.</span> Experience</a></li>
+                <li><a href="#projects"><span>03.</span> Projects</a></li>
+                <li><a href="#contact"><span>04.</span> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://github.com/rdivyaraj1011" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/divyaraj-rathod-35403540/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/divyraj_24_/" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <!-- Email Link -->
+    <div class="email-link">
+        <a href="mailto:rdivyaraj1011@gmail.com">rdivyaraj1011@gmail.com</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <h1>Hi, my name is</h1>
+            <h2>Divyaraj Rathod.</h2>
+            <h3>I build seamless digital experiences.</h3>
+            <p>I'm a Full-Stack Developer with a passion for building seamless user experiences and powerful backend solutions. Currently, I'm focused on creating scalable web applications that make an impact.</p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about fade-in">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! My name is <strong>Divyaraj Rathod</strong> and I enjoy creating things that live on the internet. My interest in web development started during my studies at Sutex Computer College, where I discovered the power of modern web technologies.</p>
+                    
+                    <p>Fast-forward to today, and I've had the privilege of working at <a href="#">BVM Infotech</a>, <a href="#">Octopus Technology</a>, and as a <a href="#">freelance developer</a>. My main focus these days is building accessible, scalable web applications using the MERN stack and modern cloud technologies.</p>
+                    
+                    <p>I specialize in creating efficient, reliable, and user-friendly products that deliver exceptional user experiences. Here are the technologies I've been working with recently:</p>
+                    
+                    <ul class="skills-list">
+                        <li>JavaScript (ES6+)</li>
+                        <li>TypeScript</li>
+                        <li>React.js</li>
+                        <li>Next.js</li>
+                        <li>Node.js</li>
+                        <li>Nest.js</li>
+                        <li>MongoDB</li>
+                        <li>AWS (Lambda, S3, EC2)</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/300x300/64ffda/0a192f?text=Divyaraj" alt="Divyaraj Rathod">
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience fade-in">
+            <h2 class="section-title">Where I've Worked</h2>
+            <div class="job-tabs">
+                <button class="tab-button active" onclick="showJob('job1')">Freelancer</button>
+                <button class="tab-button" onclick="showJob('job2')">Octopus Tech</button>
+                <button class="tab-button" onclick="showJob('job3')">BVM Infotech</button>
+            </div>
+            <div class="job-content">
+                <div id="job1" class="job-panel">
+                    <h3 class="job-title">Full Stack Developer</h3>
+                    <p class="job-company">@ Freelancer</p>
+                    <p class="job-date">January 2025 - Present</p>
+                    <ul class="job-description">
+                        <li>Develop and maintain responsive web applications using React.js, Node.js, Express.js, and MongoDB</li>
+                        <li>Collaborate with clients to gather requirements and deliver tailored solutions</li>
+                        <li>Integrate third-party APIs and implement secure authentication systems</li>
+                        <li>Ensure performance optimization, mobile responsiveness, and cross-browser compatibility</li>
+                        <li>Manage the full project lifecycle: planning, development, testing, deployment, and maintenance</li>
+                    </ul>
+                </div>
+                <div id="job2" class="job-panel" style="display: none;">
+                    <h3 class="job-title">Full Stack Developer</h3>
+                    <p class="job-company">@ Octopus Technology</p>
+                    <p class="job-date">February 2022 - Present</p>
+                    <ul class="job-description">
+                        <li>Work as a senior web developer to communicate with clients and achieve client requirements</li>
+                        <li>Help team members solve problems and explore new technologies</li>
+                        <li>Lead development of complex web applications using MERN stack</li>
+                        <li>Mentor junior developers and conduct code reviews</li>
+                        <li>Collaborate with cross-functional teams to deliver high-quality products</li>
+                    </ul>
+                </div>
+                <div id="job3" class="job-panel" style="display: none;">
+                    <h3 class="job-title">MERN Developer</h3>
+                    <p class="job-company">@ BVM Infotech</p>
+                    <p class="job-date">December 2020 - February 2022</p>
+                    <ul class="job-description">
+                        <li>Worked on tight schedules to meet deadlines and achieve project goals</li>
+                        <li>Helped manage projects and led development teams</li>
+                        <li>Collaborated with people from different countries and cultures</li>
+                        <li>Developed full-stack web applications using MongoDB, Express.js, React.js, and Node.js</li>
+                        <li>Implemented responsive designs and ensured cross-browser compatibility</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects fade-in">
+            <h2 class="section-title">Some Things I've Built</h2>
+            <div class="project-grid">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <h3>Webbwe - Web Shopping Mall</h3>
+                    <p>A revolutionary platform that gathers web stores in one place, offering a new simple visual way for shoppers to find web stores. Features centralized shopping experience with enhanced product discovery and comparison.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>Express.js</span>
+                        <span>AWS Lambda</span>
+                        <span>AWS S3</span>
+                        <span>Stripe</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <h3>Politiq - Political Social Platform</h3>
+                    <p>Built a political social platform that combines popular features of existing networks with new tools for meaningful debates and discussions. Created a safe, thought-provoking environment for respectful political discourse.</p>
+                    <div class="project-tech">
+                        <span>React.js</span>
+                        <span>Socket.IO</span>
+                        <span>Node.js</span>
+                        <span>Express.js</span>
+                        <span>Real-time Chat</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <h3>Legaliser - AI Contract Management</h3>
+                    <p>Developed AI-powered contract management solutions to automate compliance and enhance document clarity. Streamlined legal processes with innovative tools, reducing manual effort and boosting operational efficiency.</p>
+                    <div class="project-tech">
+                        <span>Next.js</span>
+                        <span>Node.js</span>
+                        <span>Stripe</span>
+                        <span>AI/ML</span>
+                        <span>Document Processing</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <h3>Exam Solution - Online Math Tutoring</h3>
+                    <p>Created a comprehensive online tutoring platform providing personalized one-on-one support to students. Features include real-time interaction, tailored lessons, and progress tracking to boost student confidence.</p>
+                    <div class="project-tech">
+                        <span>React.js</span>
+                        <span>Socket.IO</span>
+                        <span>Node.js</span>
+                        <span>Firebase</span>
+                        <span>Real-time Learning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact fade-in">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>I'm always open to discussing new opportunities, interesting projects, or just having a conversation about technology. Whether you have a project in mind or just want to say hello, feel free to reach out!</p>
+            <a href="mailto:rdivyaraj1011@gmail.com" class="cta-button">Say Hello</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built by Divyaraj Rathod</p>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function showJob(jobId) {
+            // Hide all job panels
+            const panels = document.querySelectorAll('.job-panel');
+            panels.forEach(panel => panel.style.display = 'none');
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected job panel
+            document.getElementById(jobId).style.display = 'block';
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
